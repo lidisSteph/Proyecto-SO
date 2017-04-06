@@ -68,35 +68,28 @@
 })(jQuery); // End of use strict
 
 
+$(document).ready(function(){
+            ///alert("Estamos ready, el DOM fue cargado");
+            $("#btn-procesar").click(function(){
+                // $("#btn-ingresar").button("loading");
+                // $("#img-loading").fadeIn(200);
+                var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val(); //formato similar a cuando se envia la informacion por GET
+                //parametro1=valor1&parametro2=valor2&.....parametroN=valorN
+                alert("Informacion que se enviara: " + parametros);
+                $.ajax({
+                    url:"ajax/procesar.php?accion=guardar",
+                    method:"POST",
+                    data: parametros,
+                    success:function(respuesta){
+                        // $("#img-loading").fadeOut(200);
+                        // $("#btn-ingresar").button("reset");
+                        $("#resultado").html(respuesta);
+                    },
+                    error:function(e){
+                        alert("Ocurrio un error."+e);
+                    }
+                }); 
+            }); 
 
-$( document ).ready(function() {
-    alert("WNAS");
-    $("#btn-procesar").click(function(){
-        // alert("WENAS");
-        var parametros= "archivo="+$("#txt-archivo").val()+
-                        "&ciclos="+$("#txt-ciclos").val();
-        $.ajax({
-               // la URL para la petición
-    url : 'procesar.php',
- 
-    // la información a enviar
-    // (también es posible utilizar una cadena de datos)
-    data : parametros,
- 
-    // especifica si será una petición POST o GET
-    type : 'POST',
- 
-    // el tipo de información que se espera de respuesta
- 
-    // código a ejecutar si la petición es satisfactoria;
-    // la respuesta es pasada como argumento a la función
-    success : function(resultado) {
-        // $("#resultado").html("Weeeee");
-            }
+           
         });
-
-
-    });
-});
-
- 

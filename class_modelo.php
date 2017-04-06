@@ -1,7 +1,7 @@
 <?php
 
 
-class Modelo 
+class Proceso 
 {
 	private $idProceso;
 	private $estadoProceso;
@@ -9,14 +9,19 @@ class Modelo
 	private $cantidadInstrucciones;
 	private $instruccionBloqueo;
 	private $evento;
-	function __construct($idProceso, $estadoProceso, $prioridad, $cantidadInstrucciones, $instruccionBloqueo, $evento)
+	private $parametros;
+	function __construct($parametros)
 	{
-		$this->idProceso = $idProceso;
-		$this->estadoProceso = $estadoProceso;
-		$this->prioridad = $prioridad;
-		$this->cantidadInstrucciones = $cantidadInstrucciones;
-		$this->instruccionBloqueo= $instruccionBloqueo;
-		$this->evento= $evento;
+		// for($j=0;$j<sizeof($parametros);$j++){
+  //               echo $subpartes[$j]."<br>";
+         $this->idProceso = $subpartes[0];
+		$this->estadoProceso = $subpartes[1];
+		$this->prioridad = $subpartes[2];
+		$this->cantidadInstrucciones = $subpartes[3];
+		$this->instruccionBloqueo= $subpartes[4]
+		$this->evento= $subpartes[5];
+        //  }
+		
 	}
 
 	public function Holis(){

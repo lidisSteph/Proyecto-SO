@@ -1,5 +1,4 @@
 <?php
-include_once("../class_modelo.php");
 ?>
 
 <!DOCTYPE html>
@@ -103,7 +102,7 @@ include_once("../class_modelo.php");
                                <p> Ingrese archivo con extensión .txt:</p>
                             </td>
                             <td>
-                                <input type="text" id="txt-archivo"  style="color: #F05F40; font-size:20px;">
+                                <input type="text" id="txt-archivo"  value="C:\wamp\www\Proyecto SO\Proyecto-SO\prueba.txt" style="color: #F05F40; font-size:20px;">
                             </td>   
                         </tr>
                         <tr>
@@ -121,7 +120,7 @@ include_once("../class_modelo.php");
                     <!-- <h2 class="section-heading">We've got what you need!</h2> -->
                     <!-- <hr class="light"> -->
                     <!-- <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p> -->
-                    <a href="#services" id="btn-procesar" class="page-scroll btn btn-default btn-xl sr-button">¡Procesa!</a>
+                    <a href="#services" id="btn-procesar" class="page-scroll btn btn-warning btn-xl sr-button">¡Procesa!</a>
 
                           
 
@@ -346,10 +345,10 @@ include_once("../class_modelo.php");
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    
-    <script src="js/creative.min.js"></script>
-    <!-- // <script src="js/creative.js"></script> -->
+    <script src="js/creative.js"></script>
    
+    <script src="js/creative.min.js"></script>
+    
 
 </body>
 
