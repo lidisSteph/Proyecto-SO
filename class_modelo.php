@@ -23,11 +23,62 @@ class Proceso
         //  }
 		
 	}
-
+/*
+1. Que sean enteros todo lo que enviemos
+2. una vez separadas las con ; el tamaño debe de ser igual lo estípulado
+3. Que no se repita el ID
+4. Que retorne un error a todo aquello que no esta en los parametros que ella pide
+*/
 	public function Holis(){
 		echo "Que ondas";
 	} 
 
+	public function getIdProceso(){
+		return $this->idProceso;
+	}
+
+	public function getIdProceso($idProceso){
+		$this->idProceso=$idProceso;
+	}
+
+	public function getestadoProceso(){
+		return $this->estadoProceso;
+	}
+
+	public function getestadoProceso($estadoProceso){
+		$this->estadoProceso=$estadoProceso;
+	}
+	public function getprioridad(){
+		return $this->prioridad;
+	}
+
+	public function setprioridad($prioridad){
+		$this->prioridad=$prioridad;
+	}
+
+	public function getcantidadInstrucciones(){
+		return $this->cantidadInstrucciones;
+	}
+
+	public function setcantidadInstrucciones($cantidadInstrucciones){
+		$this->cantidadInstrucciones=$cantidadInstrucciones;
+	}
+
+	public function getinstruccionBloqueo(){
+		return $this->instruccionBloqueo;
+	}
+
+	public function setinstruccionBloqueo($instruccionBloqueo){
+		$this->instruccionBloqueo=$instruccionBloqueo;
+	}
+
+	public function getevento(){
+		return $this->evento;
+	}
+
+	public function setevento($evento){
+		$this->evento=$evento;
+	}
 }
 
 
