@@ -134,7 +134,7 @@
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Resultado</h2>
-                    <hr class="primary">
+                    <hr class="primary"> <!-- linea horizontal roja -->
                 </div>
             </div>
         </div>
@@ -142,16 +142,17 @@
             <div class="row">
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#BCP">
+                        <a  href="#" data-toggle="modal" data-target="#bloque-control">
                             <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                            <h3>Bloque de Control de Procesos</h3>
+                            <h3>Bloque de Control de Procesos</h3>  
                         </a>
                         <p class="text-muted">Puedes conocer la información de todos los procesos</p>
+                        
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#listo">
+                        <a href="#" data-toggle="modal" data-target="#modal-listos">
                             <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
                             <h3>Listos</h3>
                         </a>
@@ -160,7 +161,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                       <a href="#ejecutando"> 
+                       <a href="#" data-toggle="modal" data-target="#modal-ejecutando"> 
                             <i class="fa fa-4x fa-car text-primary sr-icons"></i>
                             <h3>Ejecutando</h3>
                         </a>
@@ -169,7 +170,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#bloqueado">
+                        <a href="#" data-toggle="modal" data-target="#modal-bloqueado">
                             <i class="fa fa-4x fa-times text-primary sr-icons"></i>
                             <h3>Bloqueado</h3>
                         </a>
@@ -178,7 +179,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#salida">
+                        <a href="#" data-toggle="modal" data-target="#modal-salida">
                             <i class="fa fa-4x fa-check text-primary sr-icons"></i>
                             <h3>Salida</h3>
                         </a>
@@ -187,7 +188,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#nuevo">
+                        <a href="#" data-toggle="modal" data-target="#modal-informacion">
                             <i class="fa fa-4x fa-question-circle-o text-primary sr-icons"></i>
                             <h3>Explicación</h3>
                         </a>
@@ -312,7 +313,7 @@
             </div>
         </div>
     </aside>
-
+    
     <section id="contact">
         <div class="container">
             <div class="row">
@@ -321,7 +322,7 @@
                     <hr class="primary">
                     <p>Lidis Stephanie Cordón Hernández 20141002866</p>
                     <p>Ana Raquel Andino Medina 20141002866</p>
-                    <p>Lidis Stephanie Cordón Hernández 20141002866</p>
+                    <p>Ana Iris Padilla Maradiaga 20141006787</p>
                 </div>
                 <div class="col-lg-4 col-lg-offset-2 text-center">
                     <i class="fa fa-university fa-3x sr-contact"></i>
@@ -334,6 +335,177 @@
             </div>
         </div>
     </section>
+     
+    <!-- modal para el bloque de control--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="bloque-control">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Bloque De Control De Proceso</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+               
+                <table class="table table-striped" border="2px">
+                  <tr>
+                    <th>Identificadro</th>
+                    <th>Estado</th>
+                    <th>Prioridad</th>
+                    <th>Instrucciones</th>
+                    <th>Evento</th>
+                   </tr> 
+                   <tr>
+                   <td>1001</td>
+                   <td>5</td>
+                   <td>2</td>
+                   <td>322</td>
+                   <td>5</td>
+                   </tr>
+
+                </table>
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- modal listos--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-listos">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Listos</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                <table class="table table-striped" border="2px">
+                    <tr>
+                        <th>Procesos en estado listo</th>                    
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </table>
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- modal Ejecutando--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Ejecutando</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                <table class="table table-striped" border="2px">
+                    <tr>
+                        <th>Procesos en estado Ejecutando</th>                    
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </table>
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+    <!-- modal Bloqueado--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-bloqueado">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Bloqueado</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                <table class="table table-striped" border="2px">
+                    <tr>
+                        <th>Procesos en estado Bloqueado</th>                    
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </table>
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<!-- modal Terminado--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-salida">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Salida</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                <table class="table table-striped" border="2px">
+                    <tr>
+                        <th>Procesos en estado terminado</th>                    
+                    </tr>
+                    <tr>
+                        <th></th>
+                    </tr>
+                </table>
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
+
+<!-- modal informacion--> 
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-informacion">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title">Informacion</h4>
+          </div>
+          <div class="modal-body">
+            <p>
+                ¡GRACIAS POR SU VISITA!
+                
+            </p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
+          </div>
+        </div><!-- /.modal-content -->
+      </div><!-- /.modal-dialog -->
+    </div><!-- /.modal -->
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
