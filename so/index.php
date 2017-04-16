@@ -120,7 +120,7 @@
                     <!-- <h2 class="section-heading">We've got what you need!</h2> -->
                     <!-- <hr class="light"> -->
                     <!-- <p class="text-faded">Start Bootstrap has everything you need to get your new website up and running in no time! All of the templates and themes on Start Bootstrap are open source, free to download, and easy to use. No strings attached!</p> -->
-                    <a href="#services" id="btn-procesar" class="page-scroll btn btn-warning btn-xl sr-button">¡Procesa!</a>
+                    <a href="#services" id="btn-procesar" class="page-scroll btn btn-primary btn-xl sr-button">¡Procesa!</a>
 
                           
 
@@ -129,30 +129,38 @@
         </div>
     </section>
 
+       
+        
+
     <section id="services">
-        <div class="container">
+
+         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
                     <h2 class="section-heading">Resultado</h2>
-                    <hr class="primary"> <!-- linea horizontal roja -->
+                    <hr class="secundary"> <!-- linea horizontal roja -->
                 </div>
             </div>
         </div>
-        <div class="container">
+
+        <div class="container" id="resultaditos">
             <div class="row">
+
                 <div class="col-lg-2 col-md-6 text-center">
-                    <div class="service-box">
-                        <a  href="#" data-toggle="modal" data-target="#bloque-control">
-                            <i class="fa fa-4x fa-newspaper-o text-primary sr-icons"></i>
-                            <h3>Bloque de Control de Procesos</h3>  
-                        </a>
+                    <div class="service-box" >
+                        <a  href="#" data-toggle="modal" data-target="#bloque-control" aria-hidden="true" id="a-bcp">
+                                  <i class="fa fa-4x fa-newspaper-o sr-icons"></i>
+                       
+                                   <h3> Bloque de Control de Procesos</h3> 
+                                  </a>
+
                         <p class="text-muted">Puedes conocer la información de todos los procesos</p>
                         
                     </div>
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#" data-toggle="modal" data-target="#modal-listos">
+                        <a href="#" data-toggle="modal" data-target="#modal-listos" id="a-listos">
                             <i class="fa fa-4x fa-paper-plane text-primary sr-icons"></i>
                             <h3>Listos</h3>
                         </a>
@@ -336,36 +344,38 @@
         </div>
     </section>
      
+<div style="padding:50px 50px 50px 50px">
     <!-- modal para el bloque de control--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="bloque-control">
-      <div class="modal-dialog" role="document">
-        <div class="modal-content">
+    <div class="modal fade" tabindex="-1" role="dialog" id="bloque-control" style="padding: 10px 10px 10px 10px">
+      <div class="modal-dialog" role="document" style="width:45%">
+        <div class="modal-content" style="padding: 10px 10px 10px 10px">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Bloque De Control De Proceso</h4>
           </div>
-          <div class="modal-body">
-            <p>
-               
-                <table class="table table-striped" border="2px">
-                  <tr>
-                    <th>Identificadro</th>
-                    <th>Estado</th>
-                    <th>Prioridad</th>
-                    <th>Instrucciones</th>
-                    <th>Evento</th>
-                   </tr> 
-                   <tr>
-                   <td>1001</td>
-                   <td>5</td>
-                   <td>2</td>
-                   <td>322</td>
-                   <td>5</td>
-                   </tr>
+          <div class="modal-body table-responsive" style="padding: 10px 20px 20px 20px">
+            <!-- <section> -->
 
+            <div style="padding: 20px 20px 20px 20px">
+                <table>
+                    <tr>
+                        <td>Proceso aceptado: </td>
+                        <td><i class="fa fa-check" style="color:#009900" aria-hidden="true"></i></td>
+
+                    </tr>
+                    <tr>
+                        <td>Proceso rechazado: </td>
+                        <td><i class="fa fa-close" style="color:#CC0000" aria-hidden="true"></i></td>
+                    </tr>
                 </table>
-                
-            </p>
+            </div>
+            <!-- </section> -->
+            
+
+            <div id="tr-bcp" style="width:100%">
+            </div>
+
+
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -374,8 +384,10 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+</div>
+
     <!-- modal listos--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-listos">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-listos" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -383,7 +395,26 @@
             <h4 class="modal-title">Listos</h4>
           </div>
           <div class="modal-body">
-            <p>
+
+                 <div style="padding: 20px 20px 20px 20px">
+                <table>
+                    <tr>
+                        <td>Proceso aceptado: </td>
+                        <td><i class="fa fa-check" style="color:#009900" aria-hidden="true"></i></td>
+
+                    </tr>
+                    <tr>
+                        <td>Proceso rechazado: </td>
+                        <td><i class="fa fa-close" style="color:#CC0000" aria-hidden="true"></i></td>
+                    </tr>
+                </table>
+            </div>
+            <!-- </section> -->
+            
+
+            <div id="tr-listo" style="width:100%"></div>
+
+           <!--  <p>
                 <table class="table table-striped" border="2px">
                     <tr>
                         <th>Procesos en estado listo</th>                    
@@ -393,7 +424,7 @@
                     </tr>
                 </table>
                 
-            </p>
+            </p> -->
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -403,7 +434,7 @@
     </div><!-- /.modal -->
 
     <!-- modal Ejecutando--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -431,7 +462,7 @@
     </div><!-- /.modal -->
 
     <!-- modal Bloqueado--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-bloqueado">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-bloqueado" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
@@ -459,11 +490,33 @@
     </div><!-- /.modal -->
 
 <!-- modal Terminado--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-salida">
+
+
+<!-- <div class="modal fade" id="miModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel">Esto es un modal</h4>
+            </div>
+            <div class="modal-body">
+                Texto del modal
+            </div>
+        </div>
+    </div>
+</div>
+ -->
+
+
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-salida" aria-hidden="true">
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <h4 class="modal-title">Salida</h4>
           </div>
           <div class="modal-body">
@@ -517,7 +570,8 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.3/jquery.easing.min.js"></script>
     <script src="vendor/scrollreveal/scrollreveal.min.js"></script>
     <script src="vendor/magnific-popup/jquery.magnific-popup.min.js"></script>
-    <script src="js/creative.js"></script>
+
+    <script src="js/acciones.js"></script>
    
     <script src="js/creative.min.js"></script>
     
