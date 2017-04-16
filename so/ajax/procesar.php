@@ -92,9 +92,12 @@ include_once('../class/class_modelo.php.');
                 for($i=0; $i<sizeof($procesos);$i++){
 
 
-                   if(is_numeric($procesos[$i]->getIdProceso())==false||is_numeric($procesos[$i]->getEstadoProceso())==false
-                    ||is_numeric($procesos[$i]->getPrioridad())==false||is_numeric($procesos[$i]->getCantidadInstrucciones())==false
-                    ||is_numeric($procesos[$i]->getInstruccionBloqueo())==false||is_numeric($procesos[$i]->getEvento())==false){
+                   if(is_numeric($procesos[$i]->getIdProceso())==false
+                    ||ctype_digit($procesos[$i]->getEstadoProceso())==false
+                    ||ctype_digit($procesos[$i]->getPrioridad())==false
+                    ||ctype_digit($procesos[$i]->getCantidadInstrucciones())==false
+                    ||ctype_digit($procesos[$i]->getInstruccionBloqueo())==false
+                    ||ctype_digit($procesos[$i]->getEvento())==false){
 
                       // if($procesos[$i]->getIdProceso()=="vacio"||$procesos[$i]->getEstadoProceso()=="vacio"||$procesos[$i]->getPrioridad()=="vacio"
                       //   ||$procesos[$i]->getCantidadInstrucciones()=="vacio"||$procesos[$i]->getInstruccionBloqueo()=="vacio"
