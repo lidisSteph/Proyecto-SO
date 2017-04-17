@@ -1,5 +1,10 @@
   <?php
 include_once('../class/class_modelo.php.');
+include_once('../class/class_conexion.php');
+
+$conexion = new Conexion();
+
+
 
  $path = $_POST["txt-archivo"];
             if (!file_exists($path))
@@ -86,6 +91,20 @@ include_once('../class/class_modelo.php.');
                           
                            $procesos[$i] = new Proceso($idProceso,$estadoProceso,$prioridad,$cantidadInstrucciones,$instruccionBloqueo,$evento);
 
+                             $resultado = $conexion->ejecutarInstruccion(
+                            "
+                            INSERT INTO procesos
+                           (id_proceso, estado_proceso, prioridad, cantidad_instrucciones, instruccion_bloqueo, evento)
+                            VALUES 
+                            (".$procesos[$i]->getIdProceso().",".$procesos[$i]->getEstadoProceso().",".$procesos[$i]->getPrioridad().",".$procesos[$i]->getCantidadInstrucciones().",".$procesos[$i]->getInstruccionBloqueo().",".$procesos[$i]->getEvento().");");
+                           
+                           // if($resultado){
+                           //  echo "wee";
+                           // }else{
+                           //  echo "basuqui";
+                           // }
+
+
                 }
                 $procesosRechazados=array();
 
@@ -107,6 +126,23 @@ include_once('../class/class_modelo.php.');
                                                         ,$procesos[$i]->getPrioridad(),$procesos[$i]->getCantidadInstrucciones(),
                                                         $procesos[$i]->getInstruccionBloqueo(),$procesos[$i]->getEvento());
                         //unset($procesos[$i]);  
+                      }else{
+                        $procesosAceptados[$i] = new Proceso($procesos[$i]->getIdProceso(),$procesos[$i]->  getEstadoProceso()
+                                                        ,$procesos[$i]->getPrioridad(),$procesos[$i]->getCantidadInstrucciones(),
+                                                        $procesos[$i]->getInstruccionBloqueo(),$procesos[$i]->getEvento());
+
+                         // $resultado = $conexion->ejecutarInstruccion(
+                         //    "
+                         //    INSERT INTO procesos_correctos
+                         //   (codigo_proceso)
+                         //    VALUES 
+                         //    (".$procesos[$i]->getIdProceso().",".$procesos[$i]->getEstadoProceso().",".$procesos[$i]->getPrioridad().",".$procesos[$i]->getCantidadInstrucciones().",".$procesos[$i]->getInstruccionBloqueo().",".$procesos[$i]->getEvento().");");
+                           
+                         //   if($resultado){
+                         //    echo "wee";
+                         //   }else{
+                         //    echo "basuqui";
+                         //   }
                       }
                 }
                 // echo "procesos que han sido validados: <br>";
@@ -153,19 +189,21 @@ $j=0;
                <?php
 
                     for ($i=0; $i <sizeof($procesos) ; $i++) {
-                      $j=$i+1;
-                echo "<tr class='text-center'>";
+                                      echo "<tr class='text-center'>";
 
 
                 if(isset($procesosRechazados[$i])){
                       echo     "<td><i class='fa fa-close' style='color:#CC0000' aria-hidden='true'></i></td>";
+                      echo     "<td>0</td>";
 
                   }else{
+                    $j++;
+
                 echo     "<td><i class='fa fa-check' style='color:#009900' aria-hidden='true'></i></td>";
+                echo     "<td>".$j."</td>";
 
                 }
 
-                echo     "<td>".$j."</td>";
                 echo     "<td>".$procesos[$i]->getIdProceso()."</td>";
                 echo     "<td>".$procesos[$i]->getEstadoProceso()."</td>"; 
                 echo     "<td>".$procesos[$i]->getPrioridad()."</td>";
@@ -173,6 +211,8 @@ $j=0;
                 echo     "<td>".$procesos[$i]->getInstruccionBloqueo()."</td>";
                 echo     "<td>".$procesos[$i]->getEvento()."</td>";
                 echo "</tr>";
+
+                
 
                   
                         # cod..
@@ -192,39 +232,42 @@ $j=0;
 
     break;
   case 2:
+  $j=0;
  ?>
     <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
                 <tr style="color:#F77D03" class="text-center">
-                    <td>Evaluador</td>
+                    <!-- <td>Evaluador</td> -->
                     <td>Identificador</td>
                     <td>Estado</td>
                     <td>Prioridad</td>
-                    <td>Cantidad de Instrucciones</td>
-                    <td>Instrucción de bloqueo</td>
-                    <td>Evento</td>
+                    <!-- <td>Cantidad de Instrucciones</td> -->
+                    <!-- <td>Instrucción de bloqueo</td> -->
+                    <!-- <td>Evento</td> -->
                 </tr> 
                <?php
 
                     for ($i=0; $i <sizeof($procesos) ; $i++) {
-                echo "<tr class='text-center'>";
+                      
+                        echo "<tr class='text-center'>";
 
 
-                if(isset($procesosRechazados[$i])){
-                      echo     "<td><i class='fa fa-close' style='color:#CC0000' aria-hidden='true'></i></td>";
+                        if(isset($procesosAceptados[$i])){
+                             $j++;
+                              echo     "<td>".$j."</td>";
+                              echo     "<td>".$procesos[$i]->getEstadoProceso()."</td>"; 
+                              echo     "<td>".$procesos[$i]->getPrioridad()."</td>";
+                              // echo     "<td>".$procesos[$i]->getCantidadInstrucciones()."</td>";
+                              // echo     "<td>".$procesos[$i]->getInstruccionBloqueo()."</td>";
+                              // echo     "<td>".$procesos[$i]->getEvento()."</td>";
+                              echo "</tr>";
 
-                  }else{
-                echo     "<td><i class='fa fa-check' style='color:#009900' aria-hidden='true'></i></td>";
 
-                }
+                          }else{
+                            
+                        }
 
 
-                echo     "<td>".$procesos[$i]->getIdProceso()."</td>";
-                echo     "<td>".$procesos[$i]->getEstadoProceso()."</td>"; 
-                echo     "<td>".$procesos[$i]->getPrioridad()."</td>";
-                echo     "<td>".$procesos[$i]->getCantidadInstrucciones()."</td>";
-                echo     "<td>".$procesos[$i]->getInstruccionBloqueo()."</td>";
-                echo     "<td>".$procesos[$i]->getEvento()."</td>";
-                echo "</tr>";
+                        
 
                   
                         # cod..
@@ -243,7 +286,15 @@ $j=0;
 
                 
     break;
+    case 3:
+      $conexion->ejecutarInstruccion("
+        DELETE
+      procesos;");
+      break;
   
+  case 4:
+    # code...
+    break;
   default:
     # code...
     break;

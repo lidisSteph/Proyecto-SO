@@ -11,6 +11,11 @@ $(document).ready(function(){
                     method:"POST",
                     data: parametros,
                     success:function(respuesta){
+                        // if(respuesta){
+
+                        // }else{
+                            
+                        }
                         // $("#img-loading").fadeOut(200);
                         // $("#btn-ingresar").button("reset");
                        // $("#resultado").html(respuesta);
@@ -52,7 +57,8 @@ $(document).ready(function(){
                     url:"ajax/procesar.php?accion=2",
                     method:"POST",
                     data: parametros,
-                    success:function(respuesta){
+                    success:
+                    function(respuesta){
                         // $("#img-loading").fadeOut(200);
                         // $("#btn-ingresar").button("reset");
                         $("#tr-listo").html(respuesta);

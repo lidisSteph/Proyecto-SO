@@ -28,12 +28,7 @@
     <!-- Theme CSS -->
     <link href="css/creative.min.css" rel="stylesheet">
 
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+
 
 </head>
 
@@ -344,7 +339,9 @@
         </div>
     </section>
      
-<div style="padding:50px 50px 50px 50px">
+<div id="modales">
+    
+    <div style="padding:50px 50px 50px 50px">
     <!-- modal para el bloque de control--> 
     <div class="modal fade" tabindex="-1" role="dialog" id="bloque-control" style="padding: 10px 10px 10px 10px">
       <div class="modal-dialog" role="document" style="width:45%">
@@ -373,6 +370,7 @@
             
 
             <div id="tr-bcp" style="width:100%">
+            <im
             </div>
 
 
@@ -387,14 +385,16 @@
 </div>
 
     <!-- modal listos--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-listos" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+   <div style="padding:50px 50px 50px 50px">
+       
+        <div class="modal fade" tabindex="-1" role="dialog" id="modal-listos" aria-hidden="true" style="padding: 10px 10px 10px 10px">
+      <div class="modal-dialog" role="document" style="width:45%">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Listos</h4>
           </div>
-          <div class="modal-body">
+          <div class="modal-body table-responsive" style="padding: 10px 20px 20px 20px">
 
                  <div style="padding: 20px 20px 20px 20px">
                 <table>
@@ -427,11 +427,14 @@
             </p> -->
           </div>
           <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Ejecutar</button>
+          
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
-          </div>
+            </div>
         </div><!-- /.modal-content -->
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
+   </div>
 
     <!-- modal Ejecutando--> 
     <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando" aria-hidden="true">
@@ -539,6 +542,7 @@
       </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
+</div>
 <!-- modal informacion--> 
     <div class="modal fade" tabindex="-1" role="dialog" id="modal-informacion">
       <div class="modal-dialog" role="document">
@@ -562,6 +566,7 @@
 
     <!-- jQuery -->
     <script src="vendor/jquery/jquery.min.js"></script>
+
 
     <!-- Bootstrap Core JavaScript -->
     <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
