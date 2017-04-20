@@ -15,7 +15,7 @@ $(document).ready(function(){
 
                         // }else{
                             
-                        }
+                        // }
                         // $("#img-loading").fadeOut(200);
                         // $("#btn-ingresar").button("reset");
                        // $("#resultado").html(respuesta);

@@ -5,7 +5,7 @@ include_once('../class/class_conexion.php');
 $conexion = new Conexion();
 
 
-
+// Guardamos en una variable la url del archivo
  $path = $_POST["txt-archivo"];
             if (!file_exists($path))
                 exit("File not found");
@@ -60,32 +60,7 @@ $conexion = new Conexion();
                                              # code...
                                              break;
                                          }   
-                                 // }else{
-                                 //   switch ($j) {
-                                 //           case 0:
-                                 //                $idProceso="vacio";
-                                 //             break;
-                                 //            case 1:
-                                 //                $estadoProceso="vacio";
-                                 //             break;
-                                 //             case 2:
-                                 //                $prioridad="vacio";
-                                 //             break;
-                                 //             case 3:
-                                 //                $cantidadInstrucciones="vacio";
-                                 //             break; 
-                                 //             case 4:
-                                 //                $instruccionBloqueo="vacio";
-                                 //             break;
-                                 //             case 5:
-                                 //                $evento="vacio";
-                                 //             break;   
-                                 //           default:
-                                 //             # code...
-                                 //             break;
-                                 //         }   
-                                 // }
-                         
+                             
                           }
 
                           
@@ -98,38 +73,40 @@ $conexion = new Conexion();
                             VALUES 
                             (".$procesos[$i]->getIdProceso().",".$procesos[$i]->getEstadoProceso().",".$procesos[$i]->getPrioridad().",".$procesos[$i]->getCantidadInstrucciones().",".$procesos[$i]->getInstruccionBloqueo().",".$procesos[$i]->getEvento().");");
                            
-                           // if($resultado){
-                           //  echo "wee";
-                           // }else{
-                           //  echo "basuqui";
-                           // }
+                       
 
 
                 }
+
+
                 $procesosRechazados=array();
 
                 for($i=0; $i<sizeof($procesos);$i++){
 
+     
 
-                   if(is_numeric($procesos[$i]->getIdProceso())==false
+
+                    if(is_numeric($procesos[$i]->getIdProceso())==false
                     ||ctype_digit($procesos[$i]->getEstadoProceso())==false
                     ||ctype_digit($procesos[$i]->getPrioridad())==false
                     ||ctype_digit($procesos[$i]->getCantidadInstrucciones())==false
                     ||ctype_digit($procesos[$i]->getInstruccionBloqueo())==false
                     ||ctype_digit($procesos[$i]->getEvento())==false){
 
-                      // if($procesos[$i]->getIdProceso()=="vacio"||$procesos[$i]->getEstadoProceso()=="vacio"||$procesos[$i]->getPrioridad()=="vacio"
-                      //   ||$procesos[$i]->getCantidadInstrucciones()=="vacio"||$procesos[$i]->getInstruccionBloqueo()=="vacio"
-                      //   ||$procesos[$i]->getEvento()=="vacio"){
+                      
                         
                         $procesosRechazados[$i]= new Proceso($procesos[$i]->getIdProceso(),$procesos[$i]->getEstadoProceso()
                                                         ,$procesos[$i]->getPrioridad(),$procesos[$i]->getCantidadInstrucciones(),
                                                         $procesos[$i]->getInstruccionBloqueo(),$procesos[$i]->getEvento());
-                        //unset($procesos[$i]);  
+                       
                       }else{
                         $procesosAceptados[$i] = new Proceso($procesos[$i]->getIdProceso(),$procesos[$i]->  getEstadoProceso()
                                                         ,$procesos[$i]->getPrioridad(),$procesos[$i]->getCantidadInstrucciones(),
                                                         $procesos[$i]->getInstruccionBloqueo(),$procesos[$i]->getEvento());
+
+
+
+
 
                          // $resultado = $conexion->ejecutarInstruccion(
                          //    "
@@ -145,6 +122,9 @@ $conexion = new Conexion();
                          //   }
                       }
                 }
+
+
+
                 // echo "procesos que han sido validados: <br>";
             // Procesos que han sido dados de alta por el verificador de datos
                 for($i=0; $i<sizeof($procesos);$i++){
@@ -160,7 +140,32 @@ $conexion = new Conexion();
                   }
                     
                 }
+                $comparador=0;
+                // CODIGO PARA VALIDAR QUE NO SE REPITA UN ID DE PROCESO
+                for ($i=0; $i <sizeof($procesos); $i++) { 
+                if(isset($procesosAceptados[$i])){
+            
+                    if($comparador==0){
+                        $comparador=$procesosAceptados[$i]->getIdProceso();
+                        echo $comparador;
+
+                    }
+                  
+                    if($comparador==$procesosAceptados[$i]->getIdProceso()){
+                         $procesosRechazados[$i]= new Proceso($procesosAceptados[$i]->getIdProceso(),$procesosAceptados[$i]->getEstadoProceso()
+                                                        ,$procesosAceptados[$i]->getPrioridad(),$procesosAceptados[$i]->getCantidadInstrucciones(),
+                                                        $procesosAceptados[$i]->getInstruccionBloqueo(),$procesosAceptados[$i]->getEvento());
+                         $procesosAceptados[$i]=null;
+                     }
+                 
+                 
+                }
+              }
+
+              ///////////////////////////////////////////////////////////////////////////////
                // var_export($procesosRechazados);
+
+              
 
                 if (!feof($file))
                     echo "Error: EOF not found\n";
@@ -169,13 +174,16 @@ $conexion = new Conexion();
 
             }
 
+
+
 switch ($_GET["accion"]) {
   case 1:
 $j=0;
 
 
-?>
-    <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
+              ?>
+              <!-- HTML -->
+             <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
                 <tr style="color:#F77D03" class="text-center">
                     <td>Evaluador</td>
                     <td># de proceso</td>
@@ -186,10 +194,11 @@ $j=0;
                     <td>Instrucción de bloqueo</td>
                     <td>Evento</td>
                 </tr> 
+                <!-- HTML -->
                <?php
 
-                    for ($i=0; $i <sizeof($procesos) ; $i++) {
-                                      echo "<tr class='text-center'>";
+               for ($i=0; $i <sizeof($procesos) ; $i++) {
+                     echo "<tr class='text-center'>";
 
 
                 if(isset($procesosRechazados[$i])){

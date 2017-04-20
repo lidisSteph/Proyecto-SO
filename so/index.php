@@ -97,7 +97,7 @@
                                <p> Ingrese archivo con extensión .txt:</p>
                             </td>
                             <td>
-                                <input type="text" id="txt-archivo"  value="C:\xampp\htdocs\Proyecto-SO\prueba.txt" style="color: #F05F40; font-size:20px;">
+                                <input type="text" id="txt-archivo"  value="C:\wamp\www\Proyecto SO\Proyecto-SO\prueba.txt" style="color: #F05F40; font-size:20px;">
                             </td>   
                         </tr>
                         <tr>
@@ -339,7 +339,7 @@
         </div>
     </section>
      
-<div id="modales">
+<div id="div-modales">
     
     <div style="padding:50px 50px 50px 50px">
     <!-- modal para el bloque de control--> 
@@ -580,6 +580,29 @@
    
     <script src="js/creative.min.js"></script>
     
+HMTL: CASCARON DE UNA PAGINA WEB
+
+
+PHP: LENGUAJE QUE NO ES FUERTEMENTE TIPADO, ES DE USO BASICAMENTE LOGICO PARA LAS PAGINAS WEB. (IF, WHILE, FOR, ETC.) 
+
+JAVASCRIPT: LENGUAJE QUE LE DE DINAMISMO A LAS PAGINAS WEB
+
+                -JQUERY: PLUGIN QUE LE DA DINAMISMO EN "TIEMPO REAL" (BACKGROUND)
+        
+                    $.AJAX{
+                    URL:
+                    DATATYPE:
+                    DATA:
+                    success:
+                    error:
+
+                    }
+                    $.GET:
+                    $.POST:
+BOOTSTRAP
+CSS
+
+
 
 </body>
 
