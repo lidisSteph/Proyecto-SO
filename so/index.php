@@ -354,15 +354,27 @@
             <!-- <section> -->
 
             <div style="padding: 20px 20px 20px 20px">
-                <table>
+                  <table>
                     <tr>
-                        <td>Proceso aceptado: </td>
+                        <td>Proceso aceptado:  </td>
                         <td><i class="fa fa-check" style="color:#009900" aria-hidden="true"></i></td>
 
                     </tr>
                     <tr>
                         <td>Proceso rechazado: </td>
+                        <td><i class='fa fa-exclamation-triangle' style='color:#F5CB03' aria-hidden='true'></i></td>
+                        
+                    </tr>
+                    <tr>
+                        <td> Procesos excluidos </td>
                         <td><i class="fa fa-close" style="color:#CC0000" aria-hidden="true"></i></td>
+                    </tr>
+
+                </table>
+                <br>
+                <table>
+                    <tr>
+                        <td> NOTA: existen procesos excluidos cuando el número de procesos excede de 10</td>
                     </tr>
                 </table>
             </div>
@@ -370,8 +382,7 @@
             
 
             <div id="tr-bcp" style="width:100%">
-            <im
-            </div>
+
 
 
           </div>
@@ -396,38 +407,20 @@
           </div>
           <div class="modal-body table-responsive" style="padding: 10px 20px 20px 20px">
 
-                 <div style="padding: 20px 20px 20px 20px">
-                <table>
-                    <tr>
-                        <td>Proceso aceptado: </td>
-                        <td><i class="fa fa-check" style="color:#009900" aria-hidden="true"></i></td>
-
-                    </tr>
-                    <tr>
-                        <td>Proceso rechazado: </td>
-                        <td><i class="fa fa-close" style="color:#CC0000" aria-hidden="true"></i></td>
-                    </tr>
-                </table>
+            <div style="padding: 30px 30px 30px 30px">
+            <div id="tr-listo" style="width:100%"></div>
+            <div id="div-listos"></div>
+              
             </div>
             <!-- </section> -->
             
 
-            <div id="tr-listo" style="width:100%"></div>
+            
 
-           <!--  <p>
-                <table class="table table-striped" border="2px">
-                    <tr>
-                        <th>Procesos en estado listo</th>                    
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </table>
-                
-            </p> -->
+
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" data-dismiss="modal">Ejecutar</button>
+            <button type="button" id='btn-ejecutar' class="btn btn-default" data-dismiss="modal">Ejecutar</button>
           
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
@@ -445,17 +438,13 @@
             <h4 class="modal-title">Ejecutando</h4>
           </div>
           <div class="modal-body">
-            <p>
-                <table class="table table-striped" border="2px">
-                    <tr>
-                        <th>Procesos en estado Ejecutando</th>                    
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </table>
-                
-            </p>
+
+                 <div style="padding: 30px 30px 30px 30px">
+
+                    <div id="duv-ejec" style="width:100%"></div>
+                    <div id="div-ejecutando"></div>
+                      
+                    </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -599,8 +588,8 @@ JAVASCRIPT: LENGUAJE QUE LE DE DINAMISMO A LAS PAGINAS WEB
                     }
                     $.GET:
                     $.POST:
-BOOTSTRAP
-CSS
+BOOTSTRAP: gestor de paginas web
+CSS: cascading sheet style
 
 
 
