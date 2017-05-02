@@ -80,7 +80,7 @@
                    <?php echo "Modelo de 5 estados"; ?></h1>
                 <hr>
                 <!-- <p>Ingrese un archivo con extensión .txt y la cantidad de ciclos que desea ejecutar</p> -->
-                <a href="#about" class="btn btn-primary btn-xl page-scroll">¡Comencemos!</a>
+                <a href="#about" class="btn btn-primary btn-xl page-scroll" id="a-comencemos">¡Comencemos!</a>
             </div>
         </div>
     </header>
@@ -94,7 +94,7 @@
                     <table>
                         <tr>
                             <td>
-                               <p> Ingrese archivo con extensión .txt:</p>
+                               <p> Ingrese url de archivo con extensión .txt:</p>
                             </td>
                             <td>
                                 <input type="text" id="txt-archivo"  value="C:\wamp\www\Proyecto SO\Proyecto-SO\prueba.txt" style="color: #F05F40; font-size:20px;">
@@ -105,7 +105,7 @@
                                 <p>Ingrese la cantidad de ciclos que ejecutará:</p>
                             </td>
                             <td>
-                                <input type="text" id="txt-ciclos"  style="color: #F05F40; font-size:20px;">
+                                <input type="text" id="txt-ciclos"  value="20" style="color: #F05F40; font-size:20px;">
                             </td>   
                         </tr>
                        
@@ -164,7 +164,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                       <a href="#" data-toggle="modal" data-target="#modal-ejecutando"> 
+                       <a href="#" data-toggle="modal" data-target="#modal-ejecutando" id="a-ejecutando"> 
                             <i class="fa fa-4x fa-car text-primary sr-icons"></i>
                             <h3>Ejecutando</h3>
                         </a>
@@ -173,7 +173,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#" data-toggle="modal" data-target="#modal-bloqueado">
+                        <a href="#" data-toggle="modal" data-target="#modal-bloqueado" id="a-bloqueado">
                             <i class="fa fa-4x fa-times text-primary sr-icons"></i>
                             <h3>Bloqueado</h3>
                         </a>
@@ -182,7 +182,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#" data-toggle="modal" data-target="#modal-salida">
+                        <a href="#" data-toggle="modal" data-target="#modal-salida" id="a-salida">
                             <i class="fa fa-4x fa-check text-primary sr-icons"></i>
                             <h3>Salida</h3>
                         </a>
@@ -191,7 +191,7 @@
                 </div>
                 <div class="col-lg-2 col-md-6 text-center">
                     <div class="service-box">
-                        <a href="#" data-toggle="modal" data-target="#modal-informacion">
+                        <a href="#" data-toggle="modal" data-target="#modal-informacion" id="a-informacion">
                             <i class="fa fa-4x fa-question-circle-o text-primary sr-icons"></i>
                             <h3>Explicación</h3>
                         </a>
@@ -420,7 +420,7 @@
 
           </div>
           <div class="modal-footer">
-            <button type="button" id='btn-ejecutar' class="btn btn-default" data-dismiss="modal">Ejecutar</button>
+            <button type="button" id='btn-ejecutar' style="display: inline; " class="btn btn-default" data-dismiss="modal">Ejecutar</button>
           
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
             </div>
@@ -430,8 +430,8 @@
    </div>
 
     <!-- modal Ejecutando--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-ejecutando" aria-hidden="true" style="padding: 10px 10px 10px 10px">
+      <div class="modal-dialog" role="document" style="width:45%">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -454,26 +454,21 @@
     </div><!-- /.modal -->
 
     <!-- modal Bloqueado--> 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-bloqueado" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-bloqueado" aria-hidden="true" style="padding: 10px 10px 10px 10px">
+      <div class="modal-dialog" role="document" style="width:45%">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             <h4 class="modal-title">Bloqueado</h4>
           </div>
           <div class="modal-body">
-            <p>
-                <table class="table table-striped" border="2px">
-                    <tr>
-                        <th>Procesos en estado Bloqueado</th>                    
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </table>
-                
-            </p>
-          </div>
+                        <div style="padding: 30px 30px 30px 30px">
+
+                                <div id="" style="width:100%"></div>
+                                <div id="div-bloqueado"></div>
+                                  
+                                </div>
+         </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
           </div>
@@ -502,8 +497,8 @@
  -->
 
 
-    <div class="modal fade" tabindex="-1" role="dialog" id="modal-salida" aria-hidden="true">
-      <div class="modal-dialog" role="document">
+    <div class="modal fade" tabindex="-1" role="dialog" id="modal-salida" aria-hidden="true" tyle="padding: 10px 10px 10px 10px">
+      <div class="modal-dialog" role="document" style="width:45%">
         <div class="modal-content">
           <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -512,17 +507,12 @@
             <h4 class="modal-title">Salida</h4>
           </div>
           <div class="modal-body">
-            <p>
-                <table class="table table-striped" border="2px">
-                    <tr>
-                        <th>Procesos en estado terminado</th>                    
-                    </tr>
-                    <tr>
-                        <th></th>
-                    </tr>
-                </table>
-                
-            </p>
+            <div style="padding: 30px 30px 30px 30px">
+
+                                <div id="" style="width:100%"></div>
+                                <div id="div-salida"></div>
+                                  
+                                </div>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>
@@ -569,27 +559,7 @@
    
     <script src="js/creative.min.js"></script>
     
-HMTL: CASCARON DE UNA PAGINA WEB
 
-
-PHP: LENGUAJE QUE NO ES FUERTEMENTE TIPADO, ES DE USO BASICAMENTE LOGICO PARA LAS PAGINAS WEB. (IF, WHILE, FOR, ETC.) 
-
-JAVASCRIPT: LENGUAJE QUE LE DE DINAMISMO A LAS PAGINAS WEB
-
-                -JQUERY: PLUGIN QUE LE DA DINAMISMO EN "TIEMPO REAL" (BACKGROUND)
-        
-                    $.AJAX{
-                    URL:
-                    DATATYPE:
-                    DATA:
-                    success:
-                    error:
-
-                    }
-                    $.GET:
-                    $.POST:
-BOOTSTRAP: gestor de paginas web
-CSS: cascading sheet style
 
 
 

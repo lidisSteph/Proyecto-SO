@@ -158,38 +158,12 @@ switch ($_GET["accion"]) {
 
 
 
-                         // $resultado = $conexion->ejecutarInstruccion(
-                         //    "
-                         //    INSERT INTO procesos_correctos
-                         //   (codigo_proceso)
-                         //    VALUES 
-                         //    (".$procesos[$i]->getIdProceso().",".$procesos[$i]->getEstadoProceso().",".$procesos[$i]->getPrioridad().",".$procesos[$i]->getCantidadInstrucciones().",".$procesos[$i]->getInstruccionBloqueo().",".$procesos[$i]->getEvento().");");
-                           
-                         //   if($resultado){
-                         //    echo "wee";
-                         //   }else{
-                         //    echo "basuqui";
-                         //   }
                       }
                 }
 
 
 
-                // echo "procesos que han sido validados: <br>";
-            // Procesos que han sido dados de alta por el verificador de datos
-                // for($i=0; $i<sizeof($procesos);$i++){
-                //     // echo $procesos[$i]->toString();
-                // }
-
-            // echo "procesos que han sido rechazados: <br>";
-            // Procesos Rechados
-                // for($i=0; $i<sizeof($procesos);$i++){
-                //   if(isset($procesosRechazados[$i])){
-                //      // echo $procesosRechazados[$i]->toString();
-
-                //   }
-                    
-                // }
+          
                 $comparador=0;
 
                 // CODIGO PARA VALIDAR QUE NO SE REPITA UN ID DE PROCESO y CODIGO PARA VALIDAR LA INSTRUCCION DE BLOQUEO
@@ -284,7 +258,7 @@ $j=0;
               <!-- HTML -->
              <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
                 <tr style="color:#F77D03" class="text-center">
-                    <td>Evaluador</td>
+                    <td>Nuevos</td>
                     <td># de proceso</td>
                     <td>Identificador</td>
                     <td>Estado</td>
@@ -337,7 +311,17 @@ $j=0;
                                          stripslashes($i)
                                          ));
 
+                           $consulta4 = $conexion->ejecutarInstruccion(
+                                         sprintf(
+                                          'SELECT estado_proceso 
+                                          FROM procesos 
+                                          WHERE codigo_proceso = "%s"',
+                                         stripslashes($i)
+                                         ));
+
                         $fila8=$conexion->obtenerFila($consulta3);
+                        $fila9=$conexion->obtenerFila($consulta4);
+                          // echo $fila8['codigo_proceso'];
                           // echo $fila8['codigo_proceso'];
                      
                         
@@ -345,7 +329,8 @@ $j=0;
                           echo "<tr class='text-center'>";
 
                           // Se actualiza el estado ya que pasa a listos
-                             $actualizaciónEstado = $conexion->ejecutarInstruccion(sprintf(
+                            if ($fila9['estado_proceso']==0) {
+                               $actualizacionEstado = $conexion->ejecutarInstruccion(sprintf(
 
 
                                                     'UPDATE procesos 
@@ -355,6 +340,12 @@ $j=0;
                                                       stripslashes($i)
 
                                                     ));
+                        
+                            }
+                            
+
+
+                           
                              // se llama al proceso con el Id que se encuentra en corrextos
                            $con1 = $conexion->ejecutarInstruccion(
                                          sprintf(
@@ -409,44 +400,9 @@ $j=0;
                         }
 
 
-
-
-        /*                if(isset($procesosRechazados[$i])){
-                            echo     "<td><i class='fa fa-exclamation-triangle' style='color:#F5CB03' aria-hidden='true'></i></td>";
-                            echo     "<td>0</td>";
-                                  echo     "<td>".$fila['id_proceso']."</td>";
-                                  echo     "<td>".$fila['estado_proceso']."</td>"; 
-                                  echo     "<td>".$fila['prioridad']."</td>";
-                                  echo     "<td>".$fila['cantidad_instrucciones']."</td>";
-                                  echo     "<td>".$fila['instruccion_bloqueo']."</td>";
-                                  echo     "<td>".$fila['evento']."</td>";
-                                  echo "</tr>";
-
-                        }else{
-                          $j++;
-
-                          echo "<tr class='text-center'>";
-                          echo     "<td><i class='fa fa-check' style='color:#009900' aria-hidden='true'></i></td>";
-                          echo     "<td>".$j."</td>";
-                          $procesos[$i]->setEstadoProceso(1);
-                          echo     "<td>".$procesos[$i]->getIdProceso()."</td>";
-                          echo     "<td>".$procesos[$i]->getEstadoProceso()."</td>"; 
-                          echo     "<td>".$procesos[$i]->getPrioridad()."</td>";
-                          echo     "<td>".$procesos[$i]->getCantidadInstrucciones()."</td>";
-                          echo     "<td>".$procesos[$i]->getInstruccionBloqueo()."</td>";
-                          echo     "<td>".$procesos[$i]->getEvento()."</td>";
-                          echo "</tr>";
-
-                      }*/
                 }
                      
 
-              
-
-                
-
-                  
-                        # cod..
                     }
 
 
@@ -473,7 +429,6 @@ $j=0;
  ?>
     <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
                 <tr style="color:#F77D03" class="text-center">
-                    <!-- <td>Evaluador</td> -->
                     <td># proceso</td>
                     <td>Identificador</td>
                     <td>Estado</td>
@@ -484,21 +439,51 @@ $j=0;
                 </tr> 
                <?php
 
+              
+
+
+
+
+
+
+               $con = $conexion-> ejecutarInstruccion(
+                                    'SELECT a.codigo_proceso, a.estado_proceso, a.prioridad 
+                                      FROM procesos a
+                                      INNER JOIN procesos_correctos b
+                                      ON(a.codigo_proceso = b.codigo_proceso)
+                                      ORDER BY a.prioridad'
+
+                                      );
+               while ( $li = $conexion->obtenerFila($con)) {
+                    if ($li['estado_proceso']==1) {
+                       $actualizacionEstado = $conexion->ejecutarInstruccion(sprintf(
+
+
+                                                    'UPDATE procesos 
+                                                      SET estado_proceso="%s"
+                                                      WHERE codigo_proceso="%s"',
+                                                      stripslashes(2),
+                                                      stripslashes($li['codigo_proceso'])
+
+                                                    ));
+                    }
+               }
+
 
                $consulta = $conexion-> ejecutarInstruccion(
                                     'SELECT a.codigo_proceso, a.id_proceso, a.estado_proceso, a.prioridad, a.cantidad_instrucciones, a.instruccion_bloqueo, a.evento 
                                       FROM procesos a
                                       INNER JOIN procesos_correctos b
-                                      ON(a.codigo_proceso = b.codigo_proceso)'
-
+                                      ON(a.codigo_proceso = b.codigo_proceso)
+                                      WHERE a.estado_proceso = 2
+                                      ORDER BY a.prioridad'
                                       );
 
-               while ($fila1 = $conexion->obtenerFila($consulta)){
 
+               while ($fila1 = $conexion->obtenerFila($consulta)){
                         echo "<tr class='text-center'>";
 
-                        // listos($fila1['id_proceso']);
-                        // if(isset($procesosAceptados[$i])){
+                 
                              $j++;
                                   echo     "<td>".$j."</td>";
                                   echo     "<td>".$fila1['id_proceso']."</td>";
@@ -508,6 +493,8 @@ $j=0;
                                   echo     "<td>".$fila1['instruccion_bloqueo']."</td>";
                                   echo     "<td>".$fila1['evento']."</td>";
                               echo "</tr>";
+
+                                 
 
                }
 
@@ -528,94 +515,516 @@ $j=0;
 
                 
     break;
+
+
     case 3:
+       $conexion->ejecutarInstruccion("
+        DELETE FROM
+      procesos_correctos");
+       $conexion->ejecutarInstruccion("
+        DELETE FROM
+      procesos_rechazados");
+
       $conexion->ejecutarInstruccion("
-        DELETE
-      procesos;");
+        DELETE FROM
+      procesos");
+
+      echo "hola";
       break;
   
   case 4:
+
+$evento = array();
 $listos = array();
 $bloqueados = array();
-$ejecutando=0;
-
-$i=1;
-  echo "holis";
-  $total = $conexion->ejecutarInstruccion(
-              'SELECT a.codigo_proceso, b.id_proceso, b.estado_proceso, b.prioridad, b.cantidad_instrucciones, b.instruccion_bloqueo, b.evento 
-               FROM procesos_correctos a
-               INNER JOIN procesos b
-               ON (a.codigo_proceso = b.codigo_proceso)
-               ORDER BY b.prioridad'
-        );
-  while ($file = $conexion->obtenerFila($total)) {
-     // var_dump($file);
-
-    $listos[$i] = $file['codigo_proceso'];
-    echo $listos[$i];
-    $i++;
-
-  }
+$codigos=array();
+$contador = array();
+$pasos = array();
 
 
 
-  // for ($i=0; $i <sizeof($listos) ; $i++) { 
-    
-  //   switch ($) {
-  //     case 'value':
-  //       # code...
-  //       break;
-      
-  //     default:
-  //       # code...
-  //       break;
-  //   }
-
-  // }
 
 
+$c=(int)$_POST['txt-ciclos'];
 
+
+ function Listos($conexion){
+  $i=0;
+
+   $total = $conexion->ejecutarInstruccion(
+                    'SELECT a.codigo_proceso, b.id_proceso, b.estado_proceso, b.prioridad, b.cantidad_instrucciones, b.instruccion_bloqueo, b.evento 
+                     FROM procesos_correctos a
+                     INNER JOIN procesos b
+                     ON (a.codigo_proceso = b.codigo_proceso)
+                     ORDER BY b.prioridad'
+              );
+        while ($file = $conexion->obtenerFila($total)) {
+           // var_dump($file);
+
+          $listos[$i] = new Proceso ($file['id_proceso'], $file['estado_proceso'], $file['prioridad'], $file['cantidad_instrucciones'], 
+                                        $file['instruccion_bloqueo'], $file['evento']);
+          $listos[$i]->setCodigo($file['codigo_proceso']);
+
+
+          $i++;
+
+        }
+      $conexion->liberarResultado($total);
+
+      return  $listos;
+
+}
+
+
+$listos = Listos($conexion);
+
+for ($i=0; $i <sizeof($listos) ; $i++) { 
+
+  $listos[$i]->setEstadoProceso(2);
+                                       $conexion->ejecutarInstruccion(sprintf(
+                                                                         'UPDATE procesos 
+                                                                              SET estado_proceso="%s"
+                                                                              WHERE codigo_proceso="%s"',
+                                                                                stripslashes($listos[$i]->getEstadoProceso()),
+                                                                                stripslashes($listos[$i]->getCodigo())
+                                                      )); 
  
-        // for ($i=1; $i <sizeof($listos)+1 ; $i++) { 
+}
+$listos = Listos($conexion);
 
-
-        //   // if(isset($listos[$i])){
-
-
-        //   $resta=0;
-        //   $total1 = $conexion->ejecutarInstruccion(
-        //       'SELECT a.codigo_proceso, b.id_proceso, b.estado_proceso, b.prioridad, b.cantidad_instrucciones, b.instruccion_bloqueo, b.evento 
-        //        FROM procesos_correctos a
-        //        INNER JOIN procesos b
-        //        ON (a.codigo_proceso = b.codigo_proceso)
-        //        ORDER BY b.prioridad'
-        // );
-        //  while ($file1 = $conexion->obtenerFila($total1)){
-
-        //     for ($i=1; $i < $file1['cantidad_instrucciones']+1; $i++) { 
-
-        //           if($file1['cantidad_instrucciones'] == $file1['instruccion_bloqueo']){
-        //               $resta = $file1['cantidad_instrucciones']-$i;
-  
-        //           }
-                  
-        //     }
+       
+          
 
 
 
-        //   }
-        //   // }
 
 
-        //   # code...
-        // }
+
+
+
+
+
+
+
+
+
+
+while ($c > 0) {
+              if (isset($listos[0])) {
+                $ejecutando = new Proceso($listos[0]->getIdProceso(),3
+                                                        ,$listos[0]->getPrioridad(),$listos[0]->getCantidadInstrucciones(),
+                                                        $listos[0]->getInstruccionBloqueo(),$listos[0]->getEvento());
+                $ejecutando->setCodigo($listos[0]->getCodigo());
+                $ejecutando->setPaso($listos[0]->getPaso());
+                  $hola = $conexion->ejecutarInstruccion(sprintf(
+                                                                                  'UPDATE procesos 
+                                                                                    SET estado_proceso="%s"
+                                                                                    WHERE codigo_proceso="%s"',
+                                                                                    stripslashes($ejecutando->getEstadoProceso()),
+                                                                                    stripslashes($ejecutando->getCodigo())
+                                                                                  )); 
+
+               
+
+               
+                  unset($listos[0]);
+                  $listos = array_values($listos);        
+                  // var_dump($listos);
+               
+
+               ?>
+
+    </table>
+
+
+
+
+<?php
+
+
+
+                        
+         for ($j=1; $j <= 5; $j++) { 
+                              
+              if (isset($ejecutando)) {
+                
+                                if($ejecutando->getCantidadInstrucciones()>0){
+
+                                          if ($ejecutando->getCantidadInstrucciones() == $ejecutando->getInstruccionBloqueo()) {
+                                                    // $bloqueados[$i] = $ejecutando;
+                                                    $bloqueados[] = new Proceso($ejecutando->getIdProceso(),4
+                                                            ,$ejecutando->getPrioridad(),$ejecutando->getCantidadInstrucciones(),
+                                                            $ejecutando->getInstruccionBloqueo(),$ejecutando->getEvento());
+                                                    $codigos[] = $ejecutando->getCodigo();
+                                                    $pasos[] = $ejecutando->getPaso();
+
+                                                       $conexion->ejecutarInstruccion(sprintf(
+                                                                                  'UPDATE procesos 
+                                                                                    SET estado_proceso="%s"
+                                                                                    WHERE codigo_proceso="%s"',
+                                                                                    stripslashes(4),
+                                                                                    stripslashes($ejecutando->getCodigo())
+                                                                                  )); 
+
+                                                // Selección del tipo de evento 
+                                                    switch ($ejecutando->getEvento()) {
+                                                      case 3:
+                                                          $evento[]=13;
+                                                        break;
+                                                      case 5:
+                                                          $evento[]=27;
+                                                        break;
+                                                      
+                                                      default:
+                                                        # code...
+                                                        break;
+                                                    }
+                                                    unset($ejecutando);
+
+                                                 break;
+                                                 
+                                            }else{
+
+                                              $ejecutando->setCantidadInstrucciones( $ejecutando->getCantidadInstrucciones()-1);
+                                              $c = $c -1;
+
+
+                                                if($c ==0 && $ejecutando->getEstadoProceso()==3){
+
+                                                    // if (isset($ejecutando)) {
+                                                            
+                                                   ?> <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
+                                                    <tr style="color:#F77D03" class="text-center">
+                                                        <!-- <td>Evaluador</td> -->
+                                                        <td># proceso</td>
+                                                        <td>Identificador</td>
+                                                        <td>Estado</td>
+                                                        <td>Prioridad</td>
+                                                        <td>Cantidad de Instrucciones</td>
+                                                        <td>Instrucción de bloqueo</td>
+                                                        <td>Evento</td>
+                                                    </tr> 
+                                                    
+                                                   <?php
+                                           
+                                               
+                                               // while ($fila1 = $conexion->obtenerFila($ejec)){
+                                                        echo "<tr class='text-center'>";
+                                                         echo     "<td>1</td>";
+                                                                  echo     "<td>".$ejecutando->getIdProceso()."</td>";
+                                                                  echo     "<td>".$ejecutando->getEstadoProceso()."</td>"; 
+                                                                  echo     "<td>".$ejecutando->getPrioridad()."</td>";
+                                                                  echo     "<td>".$ejecutando->getCantidadInstrucciones()."</td>";
+                                                                  echo     "<td>".$ejecutando->getInstruccionBloqueo()."</td>";
+                                                                  echo     "<td>".$ejecutando->getEvento()."</td>";
+                                                          echo "</tr>";
+
+                                                   echo "</table>";                                        
+                                                    // }
+                                                }
+                                                              
+
+                                 
+
+               // }
+
+                                              
+
+                                              
+
+                                                        /*Actualizar a la base de datos lo ejecutado y llamar la consulta otra vez*/ 
+
+                                                  // Disminución de los bloqueados
+
+                                                for ($k=0; $k < sizeof($bloqueados) ; $k++) { 
+
+                                                
+                                                            if (isset($bloqueados[$k])) {
+                                                                    if ($evento[$k] > 0) {
+                                                                    // echo "dentro de eventos";
+                                                                    
+                                                                     $evento[$k] = $evento[$k]-1;
+
+                                                                  }else{
+                                                                      
+                                                                      echo $bloqueados[$k]->toString();
+                                                                        $nuevo1 = new Proceso($bloqueados[$k]->getIdProceso(),2
+                                                                              ,$bloqueados[$k]->getPrioridad(),$bloqueados[$k]->getCantidadInstrucciones(),
+                                                                               $bloqueados[$k]->getInstruccionBloqueo(),$bloqueados[$k]->getEvento()); 
+
+                                                                      array_unshift($listos, $nuevo1);
+                                                                        
+                                                                        $listos[0]->setCodigo($codigos[$k]);
+                                                                        $listos[0]->setPaso($pasos[$k]);
+
+
+
+                                                                        $listos[0]->setCantidadInstrucciones($listos[0]->getCantidadInstrucciones()-1);
+
+                                                                        unset($bloqueados[$k]);
+                                                                        unset($evento[$k]);
+                                                                        unset($codigos[$k]);
+                                                                        unset($pasos[$k]);
+                                                                        $conexion->ejecutarInstruccion(sprintf(
+                                                                                  'UPDATE procesos 
+                                                                                    SET cantidad_instrucciones="%s"
+                                                                                    WHERE codigo_proceso="%s"',
+                                                                                    stripslashes($listos[0]->getCantidadInstrucciones()),
+                                                                                    stripslashes($listos[0]->getCodigo())
+                                                                                  )); 
+                                                                        $conexion->ejecutarInstruccion(sprintf(
+                                                                                  'UPDATE procesos 
+                                                                                    SET estado_proceso="%s"
+                                                                                    WHERE codigo_proceso="%s"',
+                                                                                    stripslashes($listos[0]->getEstadoProceso()),
+                                                                                    stripslashes($listos[0]->getCodigo())
+                                                                                  )); 
+
+                                                                  }
+                                                            }
+                                                    // }
+                                                            // break;
+
+                                                }//for disminucion de bloqueados
+
+                                            } // else del bloqueo
+                                  }else{
+
+                                    $conexion->ejecutarInstruccion(sprintf(
+                                                                                  'UPDATE procesos 
+                                                                                    SET estado_proceso="%s"
+                                                                                    WHERE codigo_proceso="%s"',
+                                                                                    stripslashes(5),
+                                                                                    stripslashes($ejecutando->getCodigo())
+                                                                                  )); 
+                                  
+                                    unset($ejecutando);
+                                    
+                                  } // if cantidad instrucciones
+                                    
+                                  // } if Bloqueados
+
+
+                                    if(isset($ejecutando)){
+                                       $conexion->ejecutarInstruccion(sprintf(
+                                                    'UPDATE procesos 
+                                                      SET cantidad_instrucciones="%s"
+                                                      WHERE codigo_proceso="%s"',
+                                                      stripslashes($ejecutando->getCantidadInstrucciones()),
+                                                      stripslashes($ejecutando->getCodigo())
+                                                    ));
+                                    }
+              }
+                                       
+
+                                           
+
+
+     // } for listos
         
+           
+    } // for temporizador
+
+      
+     if (isset($ejecutando)) {
+
+      $nuevo = new Proceso($ejecutando->getIdProceso(),2
+                                                        ,$ejecutando->getPrioridad(),$ejecutando->getCantidadInstrucciones(),
+                                                        $ejecutando->getInstruccionBloqueo(),$ejecutando->getEvento()); 
+      array_unshift($listos, $nuevo);
+
+      $listos[0]->setPaso($ejecutando->getPaso()+1);
+      $listos[0]->setCodigo($ejecutando->getCodigo());
+
+
+
+
+      if ($listos[0]->getPaso()==3) {
+
+
+      switch ($listos[0]->getPrioridad()) {
+        case 1:
+         $conexion->ejecutarInstruccion(sprintf(
+                                                    'UPDATE procesos 
+                                                      SET prioridad="%s"
+                                                      WHERE codigo_proceso="%s"',
+                                                      stripslashes(2),
+                                                      stripslashes($ejecutando->getCodigo())
+                                                    ));
+          break;
+
+        case 2:
+         $conexion->ejecutarInstruccion(sprintf(
+                                                    'UPDATE procesos 
+                                                      SET prioridad="%s"
+                                                      WHERE codigo_proceso="%s"',
+                                                      stripslashes(3),
+                                                      stripslashes($ejecutando->getCodigo())
+                                                    ));
+          break;
+        default:
+          # code...
+          break;
+
+      }
+
+       $listos[0]->setPaso(0);
+       $listos = Listos($conexion);
+
+
+       
+     }
+                                    
+
+
+              }
+
+
+}else{
+
+
+  break;
+}
+
+
+
+     } //ejecutando
+
+
+
+
+  
+
 
               
 
 
 
     break;
+
+
+    case 5:
+
+    $j=0;
+    ?>
+    <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
+                <tr style="color:#F77D03" class="text-center">
+                    <td># proceso</td>
+                    <td>Identificador</td>
+                    <td>Estado</td>
+                    <td>Prioridad</td>
+                    <td>Cantidad de Instrucciones</td>
+                    <td>Instrucción de bloqueo</td>
+                    <td>Evento</td>
+                </tr> 
+               <?php
+
+
+               $consulta = $conexion-> ejecutarInstruccion(
+                                    'SELECT a.codigo_proceso, a.id_proceso, a.estado_proceso, a.prioridad, a.cantidad_instrucciones, a.instruccion_bloqueo, a.evento 
+                                      FROM procesos a
+                                      INNER JOIN procesos_correctos b
+                                      ON(a.codigo_proceso = b.codigo_proceso)
+                                      WHERE a.estado_proceso = 4
+                                      ORDER BY a.prioridad'
+
+                                      );
+
+
+               while ($fila1 = $conexion->obtenerFila($consulta)){
+                        echo "<tr class='text-center'>";
+
+                 
+                             $j++;
+                                  echo     "<td>".$j."</td>";
+                                  echo     "<td>".$fila1['id_proceso']."</td>";
+                                  echo     "<td>".$fila1['estado_proceso']."</td>"; 
+                                  echo     "<td>".$fila1['prioridad']."</td>";
+                                  echo     "<td>".$fila1['cantidad_instrucciones']."</td>";
+                                  echo     "<td>".$fila1['instruccion_bloqueo']."</td>";
+                                  echo     "<td>".$fila1['evento']."</td>";
+                              echo "</tr>";
+
+                                 
+
+               }
+
+
+
+               ?>
+
+    </table>
+
+
+
+
+<?php
+      
+      break;
+
+
+    case 6:
+
+    $j=0;
+    ?>
+    <table class="table table-striped table-hover" style="padding: 20px 20px 20px 20px">
+                <tr style="color:#F77D03" class="text-center">
+                    <td># proceso</td>
+                    <td>Identificador</td>
+                    <td>Estado</td>
+                    <td>Prioridad</td>
+                    <td>Cantidad de Instrucciones</td>
+                    <td>Instrucción de bloqueo</td>
+                    <td>Evento</td>
+                </tr> 
+               <?php
+
+
+               $consulta = $conexion-> ejecutarInstruccion(
+                                    'SELECT a.codigo_proceso, a.id_proceso, a.estado_proceso, a.prioridad, a.cantidad_instrucciones, a.instruccion_bloqueo, a.evento 
+                                      FROM procesos a
+                                      INNER JOIN procesos_correctos b
+                                      ON(a.codigo_proceso = b.codigo_proceso)
+                                      WHERE a.estado_proceso = 5
+                                      ORDER BY a.prioridad'
+
+                                      );
+
+
+               while ($fila1 = $conexion->obtenerFila($consulta)){
+                        echo "<tr class='text-center'>";
+
+                 
+                             $j++;
+                                  echo     "<td>".$j."</td>";
+                                  echo     "<td>".$fila1['id_proceso']."</td>";
+                                  echo     "<td>".$fila1['estado_proceso']."</td>"; 
+                                  echo     "<td>".$fila1['prioridad']."</td>";
+                                  echo     "<td>".$fila1['cantidad_instrucciones']."</td>";
+                                  echo     "<td>".$fila1['instruccion_bloqueo']."</td>";
+                                  echo     "<td>".$fila1['evento']."</td>";
+                              echo "</tr>";
+
+                                 
+
+               }
+
+
+
+
+
+
+
+               ?>
+
+    </table>
+
+
+
+
+<?php
+      
+      break;
   default:
     # code...
     break;

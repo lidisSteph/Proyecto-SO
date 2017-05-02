@@ -9,6 +9,9 @@ class Proceso
 	private $cantidadInstrucciones;
 	private $instruccionBloqueo;
 	private $evento;
+	private $codigo;
+	private $paso=0;
+
 	function __construct($idProceso, $estadoProceso, $prioridad, $cantidadInstrucciones, $instruccionBloqueo, $evento)
 	{
 		$this->idProceso = $idProceso;
@@ -27,6 +30,18 @@ class Proceso
 	} 
 	public function setIdProceso($idProceso){
 		$this->idProceso=$idProceso;
+	}
+	public function getPaso(){
+		return $this->paso;
+	} 
+	public function setPaso($paso){
+		$this->paso=$paso;
+	}
+	public function getCodigo(){
+		return $this->codigo;
+	} 
+	public function setCodigo($codigo){
+		$this->codigo=$codigo;
 	}
 	public function getEstadoProceso(){
 		return $this->estadoProceso;
