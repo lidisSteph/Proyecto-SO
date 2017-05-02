@@ -97,7 +97,7 @@
                                <p> Ingrese url de archivo con extensión .txt:</p>
                             </td>
                             <td>
-                                <input type="text" id="txt-archivo"  value="C:\wamp\www\Proyecto SO\Proyecto-SO\prueba.txt" style="color: #F05F40; font-size:20px;">
+                                <input type="text" id="txt-archivo"   style="color: #F05F40; font-size:20px;">
                             </td>   
                         </tr>
                         <tr>
@@ -105,7 +105,7 @@
                                 <p>Ingrese la cantidad de ciclos que ejecutará:</p>
                             </td>
                             <td>
-                                <input type="text" id="txt-ciclos"  value="20" style="color: #F05F40; font-size:20px;">
+                                <input type="text" id="txt-ciclos"   style="color: #F05F40; font-size:20px;">
                             </td>   
                         </tr>
                        

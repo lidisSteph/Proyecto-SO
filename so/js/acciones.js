@@ -1,7 +1,10 @@
 $(document).ready(function(){
-    var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
+   
+var a=0;
      
             $("#btn-procesar").click(function(){
+                 var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
+                alert(parametros);
          
                 $.ajax({
                     url:"ajax/procesar.php?accion=0",
@@ -16,6 +19,7 @@ $(document).ready(function(){
                 }); 
             });
             $("#a-comencemos").click(function(){
+                 var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
          
                 $.ajax({
                     url:"ajax/procesar.php?accion=3",
@@ -33,6 +37,7 @@ $(document).ready(function(){
             });
 
              $("#a-bcp").click(function(){
+                 var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
                 
                 $.ajax({
                     url:"ajax/procesar.php?accion=1",
@@ -48,7 +53,7 @@ $(document).ready(function(){
             }); 
 
             $("#a-listos").click(function(){
-        
+         var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
                 $.ajax({
                     url:"ajax/procesar.php?accion=2",
                     method:"POST",
@@ -63,6 +68,7 @@ $(document).ready(function(){
             });
 
             $("#a-bloqueado").click(function(){
+                 var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
                
                 $.ajax({
                     url:"ajax/procesar.php?accion=5",
@@ -79,6 +85,7 @@ $(document).ready(function(){
             }); 
 
                 $("#a-salida").click(function(){
+                     var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
                
                 $.ajax({
                     url:"ajax/procesar.php?accion=6",
@@ -97,6 +104,7 @@ $(document).ready(function(){
 
 
             $("#btn-ejecutar").click(function(){
+                 var parametros = "txt-archivo="+$("#txt-archivo").val()+"&"+"txt-ciclos="+$("#txt-ciclos").val();
                
                 $.ajax({
                     url:"ajax/procesar.php?accion=4",

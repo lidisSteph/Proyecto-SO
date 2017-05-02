@@ -1025,6 +1025,36 @@ while ($c > 0) {
 <?php
       
       break;
+      case 7:
+       $consulta = $conexion-> ejecutarInstruccion(
+                                    'SELECT a.codigo_proceso, a.id_proceso, a.estado_proceso, a.prioridad, a.cantidad_instrucciones, a.instruccion_bloqueo, a.evento 
+                                      FROM procesos a
+                                      INNER JOIN procesos_correctos b
+                                      ON(a.codigo_proceso = b.codigo_proceso)
+                                      WHERE a.estado_proceso = 2
+                                      ORDER BY a.prioridad'
+                                      );
+
+
+               while ($fila1 = $conexion->obtenerFila($consulta)){
+                        echo "<tr class='text-center'>";
+
+                 
+                             $j++;
+                                  echo     "<td>".$j."</td>";
+                                  echo     "<td>".$fila1['id_proceso']."</td>";
+                                  echo     "<td>".$fila1['estado_proceso']."</td>"; 
+                                  echo     "<td>".$fila1['prioridad']."</td>";
+                                  echo     "<td>".$fila1['cantidad_instrucciones']."</td>";
+                                  echo     "<td>".$fila1['instruccion_bloqueo']."</td>";
+                                  echo     "<td>".$fila1['evento']."</td>";
+                              echo "</tr>";
+
+                                 
+
+               }
+        # code...
+        break;
   default:
     # code...
     break;
